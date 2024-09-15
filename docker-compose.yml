@@ -1,0 +1,9 @@
+version: '3.8'
+services:
+  app:
+    image: your-app-image:latest
+    env_file:
+      - .env
+    ports:
+      - "${APP_PORT}:8080"
+    # Add other configurations as needed
