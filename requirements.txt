@@ -2,3 +2,5 @@ python-fasthtml
 SQLAlchemy
 uvicorn
 openai
+jinja2
+llm

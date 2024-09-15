@@ -1,9 +1,17 @@
-version: '3.8'
 services:
   app:
-    image: your-app-image:latest
+    build:
+      context: .
+      dockerfile: Dockerfile
     env_file:
       - .env
     ports:
-      - "${APP_PORT}:8080"
-    # Add other configurations as needed
+      - "8000:8000"
+    volumes:
+      - .:/app
+    networks:
+      - shared_net
+
+networks:
+  shared_net:
+    external: true
