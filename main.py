@@ -45,7 +45,7 @@ class WordRepo:
     db: object
 
     def all(self):
-        return self.db.query(Word).all()
+        return self.db.query(Word).order_by(Word.id.desc()).all()
 
     def get(self, id:int):
         return self.db.query(Word).get(id)
