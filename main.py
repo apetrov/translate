@@ -91,7 +91,7 @@ class WordsController:
                     ),
                 hx_post='/words/create',
                 target_id='word-list',
-                hx_swap='beforeend',
+                hx_swap='afterbegin',
         )
 
         return Titled("Words",
