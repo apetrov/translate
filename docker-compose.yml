@@ -1,5 +1,5 @@
 services:
-  app:
+  words-web:
     build:
       context: .
       dockerfile: Dockerfile
@@ -10,6 +10,26 @@ services:
     networks:
       - shared_net
     restart: always
+
+    labels:
+      - "traefik.enable=true"
+      # Router for HTTP to HTTPS redirection
+      - "traefik.http.routers.words-http.entrypoints=words-web"
+      - "traefik.http.routers.words-http.rule=Host(`t.cohortful.com`)"
+      - "traefik.http.routers.words-http.middlewares=https-redirect"
+
+      # Middleware for HTTPS redirection
+      - "traefik.http.middlewares.https-redirect.redirectscheme.scheme=https"
+      - "traefik.http.routers.words-https.middlewares=auth"
+      - "traefik.http.middlewares.auth.basicauth.users=apetrov:$$apr1$$2ZjbmlaV$$bg9z8.OIve9z0ZFhGzHVJ0"
+
+      # Router for HTTPS with SSL
+      - "traefik.http.routers.words-https.entrypoints=websecure"
+      - "traefik.http.routers.words-https.rule=Host(`t.cohortful.com`)"
+      - "traefik.http.routers.words-https.tls=true"
+      - "traefik.http.routers.words-https.tls.certresolver=myresolver"
+
+      - "traefik.http.services.words.loadbalancer.server.port=8000"
 
 networks:
   shared_net:
