@@ -29,10 +29,10 @@ docker-build:
 	docker-compose build
 
 docker-up: .env
-	docker-compose up
+	docker-compose up -d
 
 run:
 	$(PYTHON) main.py
 
 deploy:
-	ssh minipc.office.remote "cd ~/projects/ai-projects/ && git pull && make docker-up"
+	ssh minipc.office.remote "cd ~/translate/ && git pull && make docker-up"
