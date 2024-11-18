@@ -33,3 +33,6 @@ docker-up: .env
 
 run:
 	$(PYTHON) main.py
+
+deploy:
+	ssh minipc.office.remote "cd ~/projects/ai-projects/ && git pull && make docker-up"

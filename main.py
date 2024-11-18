@@ -118,7 +118,7 @@ class Translate:
 class Routes:
     def init_app(self, app):
         words_controller = WordsController(app.db, app.openai)
-        app.route("/words", methods=['get'])(words_controller.index)
+        app.route("/", methods=['get'])(words_controller.index)
         app.route("/words/create", methods=['post'])(words_controller.create)
 
 
