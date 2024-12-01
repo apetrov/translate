@@ -36,3 +36,7 @@ run:
 
 deploy:
 	ssh minipc.office.remote "cd ~/translate/ && git pull && make docker-up"
+
+
+db-backup:
+	aws s3 cp data.db s3://apetrov-data/backup/translate/data-$(shell date +%Y-%m-%d).db --profile personal
