@@ -15,7 +15,7 @@ services:
       - "traefik.enable=true"
       # Router for HTTP to HTTPS redirection
       - "traefik.http.routers.words-http.entrypoints=words-web"
-      - "traefik.http.routers.words-http.rule=Host(`t.cohortful.com`)"
+      - "traefik.http.routers.words-http.rule=Host(`t.apetrov.io`)"
       - "traefik.http.routers.words-http.middlewares=https-redirect"
 
       # Middleware for HTTPS redirection
@@ -25,7 +25,7 @@ services:
 
       # Router for HTTPS with SSL
       - "traefik.http.routers.words-https.entrypoints=websecure"
-      - "traefik.http.routers.words-https.rule=Host(`t.cohortful.com`)"
+      - "traefik.http.routers.words-https.rule=Host(`t.apetrov.io`)"
       - "traefik.http.routers.words-https.tls=true"
       - "traefik.http.routers.words-https.tls.certresolver=myresolver"
 
