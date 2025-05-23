@@ -107,3 +107,4 @@ data/app.db
 *.swo
 *.err
 *.log
+data.db
