@@ -1,5 +1,6 @@
 PYENV?=.env-arm64
 PYTHON?=source $(PYENV)/bin/activate && python
+HOST=host01.vm.bcn.apetrov.io
 
 
 $(PYENV)/.venv_created:
@@ -35,13 +36,10 @@ run:
 	$(PYTHON) main.py
 
 deploy:
-	ssh minipc.office.remote "cd ~/translate/ && git pull && make docker-up"
-
+	ssh  $(HOST) "cd ~/translate/ && git pull && make docker-up"
 
 backup.db: data.db
 	sqlite3 $< ".backup $@"
 
-S3_BACKUP_DIR=s3://apetrov-data/backup/words
 backup: backup.db
-	aws s3 cp $< $(S3_BACKUP_DIR)/latest.sqlite --profile personal
-	aws s3 cp $(S3_BACKUP_DIR)/latest.sqlite $(S3_BACKUP_DIR)/backup_$(shell date +%Y%m%d_%H%M%S).sqlite --profile personal
+	echo "Backup created: $<"
